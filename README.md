@@ -1,8 +1,14 @@
-# Welcome to your Expo app 👋
+# PomoSpace 🍅⏱️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A productivity application built with Expo and React Native that combines Pomodoro timer, habit tracking, and spaced repetition learning tools.
 
-## Get started
+## Features
+
+- ⏱️ **Pomodoro Timer**: Focus with customizable work and break sessions
+- ✅ **Habit Tracker**: Build consistency with daily habit tracking
+- 🔄 **Spaced Repetition**: Optimize learning with scheduled review reminders
+
+## Getting Started
 
 1. Install dependencies
 
@@ -10,41 +16,50 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. Start the development server
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   This will present options to run the app on:
+   - 📱 Android emulator
+   - 📱 iOS simulator
+   - 🌐 Web browser
+   - 📲 Physical device via Expo Go
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Building for Production
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+To build an Android APK:
 
 ```bash
-npm run reset-project
+./build-android.sh
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+The APK will be available at `./pomospace.apk` after the build completes.
 
-## Learn more
+## Technology Stack
 
-To learn more about developing your project with Expo, look at the following resources:
+- [Expo](https://expo.dev): React Native framework
+- [NativeWind](https://nativewind.dev): Tailwind CSS for React Native
+- [Zustand](https://github.com/pmndrs/zustand): State management
+- [Notifee](https://notifee.app): Advanced notifications
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Project Structure
 
-## Join the community
+- `/src/app`: Application screens and navigation (uses file-based routing)
+- `/src/components`: Reusable UI components
+- `/src/store`: State management with Zustand
+- `/src/services`: Core functionality services
+- `/src/types`: TypeScript type definitions
+- `/src/utils`: Helper functions and utilities
 
-Join our community of developers creating universal apps.
+## Learn More
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Expo Documentation](https://docs.expo.dev/)
+- [React Native Documentation](https://reactnative.dev/docs/getting-started)
+- [NativeWind Documentation](https://nativewind.dev/docs/getting-started)
+
+## License
+
+This project is proprietary software.
