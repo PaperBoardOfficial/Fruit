@@ -4,9 +4,11 @@ import { View, Text, Pressable, ScrollView } from "react-native";
 import { useState, useEffect } from "react";
 import useSpacedRepetitionStore from "@/src/store/useSpacedRepetitionStore";
 import { Review } from "@/src/types/spaced-repetition";
+import showAlert from "@/src/utils/alert";
 
 export default function SpacedRepetitionScreen() {
-  const reviews = useSpacedRepetitionStore(state => state.reviews)
+  const reviews = useSpacedRepetitionStore(state => state.reviews);
+  const completeReview = useSpacedRepetitionStore(state => state.completeReview);
   const [upcomingReviews, setUpcomingReviews] = useState<Review[]>([]);
 
   // Calculate upcoming reviews
@@ -61,6 +63,25 @@ export default function SpacedRepetitionScreen() {
     router.push(`/edit/spaced-repetition/${id}`);
   };
 
+  // Handle completing a review
+  const handleCompleteReview = (id: string) => {
+    showAlert(
+      "Complete Review",
+      "Have you reviewed this item?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Complete",
+          onPress: async () => {
+            await completeReview(id);
+          }
+        }
+      ]
+    );
+  };
 
   return (
     <View className="flex-1 bg-white dark:bg-gray-900">
@@ -89,25 +110,36 @@ export default function SpacedRepetitionScreen() {
       ) : (
         <ScrollView className="flex-1 px-4">
           {upcomingReviews.map(review => (
-            <View className="flex-row justify-between items-start">
-              <View className="flex-1">
-                <Text className="text-lg font-semibold text-gray-800 dark:text-white">
-                  {review.title}
-                </Text>
-                <Text className="text-gray-600 dark:text-gray-300 mt-1">
-                  {formatDate(review.nextReviewDate)} • {getDaysUntil(review.nextReviewDate)}
-                </Text>
-                <Text className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
-                  Review #{review.reviewCount + 1}
-                </Text>
+            <View key={review.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-4">
+              <View className="flex-row justify-between items-start">
+                <View className="flex-1">
+                  <Text className="text-lg font-semibold text-gray-800 dark:text-white">
+                    {review.title}
+                  </Text>
+                  <Text className="text-gray-600 dark:text-gray-300 mt-1">
+                    {formatDate(review.nextReviewDate)} • {getDaysUntil(review.nextReviewDate)}
+                  </Text>
+                  <Text className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
+                    Review #{review.reviewCount + 1}
+                  </Text>
+                </View>
+                <View className="flex-row">
+                  <Pressable
+                    onPress={() => handleCompleteReview(review.id)}
+                    hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }}
+                    className="p-2 mr-2 border border-gray-300 dark:border-gray-600 rounded-full"
+                  >
+                    <Ionicons name="checkmark" size={18} color="#f97316" />
+                  </Pressable>
+                  <Pressable
+                    onPress={() => handleEditItem(review.id)}
+                    hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }}
+                    className="p-2 border border-gray-300 dark:border-gray-600 rounded-full"
+                  >
+                    <Ionicons name="pencil" size={18} color="#f97316" />
+                  </Pressable>
+                </View>
               </View>
-              <Pressable
-                onPress={() => handleEditItem(review.id)}
-                hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }}
-                className="p-2"
-              >
-                <Ionicons name="pencil" size={20} color="#f97316" />
-              </Pressable>
             </View>
           ))}
         </ScrollView>

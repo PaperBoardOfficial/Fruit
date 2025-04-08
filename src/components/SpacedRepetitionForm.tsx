@@ -23,11 +23,11 @@ interface SpacedRepetitionFormProps {
     onDelete?: () => void;
 }
 
-export default function SpacedRepetitionForm({ 
-    mode, 
-    initialValues, 
-    onSubmit, 
-    onDelete 
+export default function SpacedRepetitionForm({
+    mode,
+    initialValues,
+    onSubmit,
+    onDelete
 }: SpacedRepetitionFormProps) {
     // Form state
     const [title, setTitle] = useState(initialValues?.title || "");
@@ -38,14 +38,19 @@ export default function SpacedRepetitionForm({
     );
 
     // Time picker state
-    const [reminderTime, setReminderTime] = useState(new Date());
+    const [reminderTime, setReminderTime] = useState(() => {
+        // Create a new Date object set to 9:00 AM
+        const defaultTime = new Date();
+        defaultTime.setHours(9, 0, 0, 0);
+        return defaultTime;
+    });
     const [showTimePicker, setShowTimePicker] = useState(false);
 
     // Initialize form with initial values if in edit mode
     useEffect(() => {
         if (mode === 'edit' && initialValues) {
             setTitle(initialValues.title);
-            
+
             // Try to find a matching default schedule
             const matchingScheduleIndex = DEFAULT_SCHEDULES.findIndex(
                 schedule => JSON.stringify(schedule.intervals) === JSON.stringify(initialValues.schedule)
@@ -66,28 +71,13 @@ export default function SpacedRepetitionForm({
                 const time = new Date();
                 time.setHours(hours, minutes, 0, 0);
                 setReminderTime(time);
-            } else {
-                const defaultTime = new Date();
-                defaultTime.setHours(9, 0, 0, 0);
-                setReminderTime(defaultTime);
             }
-        } else {
-            // Default to 9:00 AM for create mode
-            reminderTime.setHours(9, 0, 0, 0);
         }
     }, [mode, initialValues]);
 
     // Format time for display
     const formatTime = (date: Date) => {
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    };
-
-    // Handle time change
-    const onTimeChange = (event: any, selectedTime?: Date) => {
-        setShowTimePicker(Platform.OS === 'ios');
-        if (selectedTime) {
-            setReminderTime(selectedTime);
-        }
     };
 
     // Update intervals when changing schedule
@@ -118,7 +108,7 @@ export default function SpacedRepetitionForm({
     // Handle delete with confirmation
     const handleDelete = () => {
         if (!onDelete) return;
-        
+
         showAlert(
             "Delete Item",
             "Are you sure you want to delete this study item?",
@@ -179,7 +169,7 @@ export default function SpacedRepetitionForm({
                         mode="time"
                         is24Hour={true}
                         display="default"
-                        onChange={onTimeChange}
+                        onChange={(_, selectedTime) => selectedTime && setReminderTime(selectedTime)}
                     />
                 )}
             </View>

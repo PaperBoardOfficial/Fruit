@@ -1,4 +1,4 @@
-# PomoSpace 🍅⏱️
+# PomoSpace
 
 A productivity application built with Expo and React Native that combines Pomodoro timer, habit tracking, and spaced repetition learning tools.
 
