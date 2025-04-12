@@ -6,19 +6,19 @@ import BackButton from "@/src/components/BackButton";
 
 export default function PomodoroSettingsScreen() {
   const router = useRouter();
-  const workMinutes = usePomodoroStore(state => state.workMinutes)
+  const focusMinutes = usePomodoroStore(state => state.focusMinutes)
   const breakMinutes = usePomodoroStore(state => state.breakMinutes)
   const longBreakMinutes = usePomodoroStore(state => state.longBreakMinutes)
   const sessionsUntilLongBreak = usePomodoroStore(state => state.sessionsUntilLongBreak)
   const autoContinue = usePomodoroStore(state => state.autoContinue)
-  const setWorkMinutes = usePomodoroStore(state => state.setWorkMinutes)
+  const setfocusMinutes = usePomodoroStore(state => state.setfocusMinutes)
   const setBreakMinutes = usePomodoroStore(state => state.setBreakMinutes)
   const setLongBreakMinutes = usePomodoroStore(state => state.setLongBreakMinutes)
   const setSessionsUntilLongBreak = usePomodoroStore(state => state.setSessionsUntilLongBreak)
   const setAutoContinue = usePomodoroStore(state => state.setAutoContinue)
 
   // Local state for input values
-  const [workInput, setWorkInput] = useState(workMinutes.toString());
+  const [focusInput, setFocusInput] = useState(focusMinutes.toString());
   const [breakInput, setBreakInput] = useState(breakMinutes.toString());
   const [longBreakInput, setLongBreakInput] = useState(longBreakMinutes.toString());
   const [sessionsInput, setSessionsInput] = useState(sessionsUntilLongBreak.toString());
@@ -27,20 +27,20 @@ export default function PomodoroSettingsScreen() {
   // Save all settings
   const saveSettings = () => {
     // Convert inputs to numbers and validate
-    const workMin = Math.max(1, Math.min(60, parseInt(workInput) || 25));
+    const focusMin = Math.max(1, Math.min(60, parseInt(focusInput) || 25));
     const breakMin = Math.max(1, Math.min(30, parseInt(breakInput) || 5));
     const longBreakMin = Math.max(1, Math.min(60, parseInt(longBreakInput) || 15));
     const sessions = Math.max(1, Math.min(10, parseInt(sessionsInput) || 4));
 
     // Update store
-    setWorkMinutes(workMin);
+    setfocusMinutes(focusMin);
     setBreakMinutes(breakMin);
     setLongBreakMinutes(longBreakMin);
     setSessionsUntilLongBreak(sessions);
     setAutoContinue(isAutoContinue);
 
     // Update local state with validated values
-    setWorkInput(workMin.toString());
+    setFocusInput(focusMin.toString());
     setBreakInput(breakMin.toString());
     setLongBreakInput(longBreakMin.toString());
     setSessionsInput(sessions.toString());
@@ -52,18 +52,18 @@ export default function PomodoroSettingsScreen() {
   return (
     <ScrollView className="flex-1 bg-white dark:bg-gray-900">
       <BackButton />
-      
+
       <View className="px-4">
 
-        {/* Work Session Setting */}
+        {/* Focus Session Setting */}
         <View className="bg-white dark:bg-gray-700 p-3 rounded-md mb-2">
-          <Text className="text-gray-800 dark:text-white mb-2">Work Session</Text>
+          <Text className="text-gray-800 dark:text-white mb-2">Focus Session</Text>
           <View className="flex-row items-center">
             <TextInput
               className="flex-1 bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-white px-3 py-2 rounded-md"
               keyboardType="number-pad"
-              value={workInput}
-              onChangeText={setWorkInput}
+              value={focusInput}
+              onChangeText={setFocusInput}
               maxLength={2}
             />
             <Text className="ml-2 text-gray-800 dark:text-white">minutes</Text>

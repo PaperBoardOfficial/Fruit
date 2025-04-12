@@ -18,7 +18,7 @@ export const createSessionSlice: StateCreator<
   SessionSlice
 > = (set, get) => ({
   // Initial session state
-  status: SessionStatus.Work,
+  status: SessionStatus.Focus,
   sessionCount: 0,
 
   // Session actions
@@ -34,11 +34,11 @@ export const createSessionSlice: StateCreator<
     let nextStatus: SessionStatus;
     let nextSessionCount = sessionCount;
 
-    if (status === SessionStatus.Work) {
+    if (status === SessionStatus.Focus) {
       nextStatus = sessionCount % sessionsUntilLongBreak === 0 ?
         SessionStatus.LongBreak : SessionStatus.Break;
     } else {
-      nextStatus = SessionStatus.Work;
+      nextStatus = SessionStatus.Focus;
       nextSessionCount = sessionCount + 1;
     }
 

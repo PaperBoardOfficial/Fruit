@@ -11,17 +11,17 @@ export async function scheduleTimerEndNotification(status: SessionStatus, endTim
   let title, body;
 
   switch (status) {
-    case SessionStatus.Work:
-      title = 'Work Session Complete';
+    case SessionStatus.Focus:
+      title = 'Focus Session Complete';
       body = 'Time for a break!';
       break;
     case SessionStatus.Break:
       title = 'Break Complete';
-      body = 'Lets get back to work!';
+      body = 'Lets get back to focus!';
       break;
     case SessionStatus.LongBreak:
       title = 'Long Break Complete';
-      body = 'Lets get back to work!';
+      body = 'Lets get back to focus!';
       break;
   }
 

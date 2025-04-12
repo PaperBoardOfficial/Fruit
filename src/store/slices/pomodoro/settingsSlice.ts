@@ -4,14 +4,14 @@ import { SessionStatus } from '@/src/types/pomodoro';
 
 export interface SettingsSlice {
   // Settings
-  workMinutes: number;
+  focusMinutes: number;
   breakMinutes: number;
   longBreakMinutes: number;
   sessionsUntilLongBreak: number;
   autoContinue: boolean;
 
   // Settings actions
-  setWorkMinutes: (minutes: number) => void;
+  setfocusMinutes: (minutes: number) => void;
   setBreakMinutes: (minutes: number) => void;
   setLongBreakMinutes: (minutes: number) => void;
   setSessionsUntilLongBreak: (sessions: number) => void;
@@ -25,19 +25,19 @@ export const createSettingsSlice: StateCreator<
   SettingsSlice
 > = (set, get) => ({
   // Default settings
-  workMinutes: 25,
+  focusMinutes: 25,
   breakMinutes: 5,
   longBreakMinutes: 15,
   sessionsUntilLongBreak: 4,
   autoContinue: false,
 
   // Settings actions
-  setWorkMinutes: (minutes: number) => {
-    set({ workMinutes: minutes });
+  setfocusMinutes: (minutes: number) => {
+    set({ focusMinutes: minutes });
 
-    // Update display if current status is Work and timer is not active
+    // Update display if current status is Focus and timer is not active
     const { status, isActive } = get();
-    if (status === SessionStatus.Work && !isActive) {
+    if (status === SessionStatus.Focus && !isActive) {
       set({ minutes, seconds: 0 });
     }
   },

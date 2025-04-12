@@ -4,7 +4,7 @@ A productivity application built with Expo and React Native that combines pomodo
 
 ## Features
 
-- ⏱️ **Pomodoro Timer**: Focus with customizable work and break sessions
+- ⏱️ **Pomodoro Timer**: Focus with customizable focus and break sessions
 - ✅ **Habit Tracker**: Build consistency with daily habit tracking
 - 🔄 **Spaced Repetition**: Optimize learning with scheduled review reminders
 - 📊 **Statistics**: Visualize your productivity with detailed charts and graphs

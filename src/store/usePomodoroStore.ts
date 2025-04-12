@@ -25,12 +25,12 @@ const usePomodoroStore = create<PomodoroState>()(
       storage: createJSONStorage(() => AsyncStorage),
       partialize: (state) => ({
         // Settings
-        workMinutes: state.workMinutes,
+        focusMinutes: state.focusMinutes,
         breakMinutes: state.breakMinutes,
         longBreakMinutes: state.longBreakMinutes,
         sessionsUntilLongBreak: state.sessionsUntilLongBreak,
         autoContinue: state.autoContinue,
-        
+
         // Session progress
         status: state.status,
         sessionCount: state.sessionCount,
