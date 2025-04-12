@@ -30,8 +30,8 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="pomospace"/>
-        <data android:scheme="com.paperboardoffical.pomospace"/>
+        <data android:scheme="fruit"/>
+        <data android:scheme="com.paperboardoffical.fruit"/>
       </intent-filter>
     </activity>
   </application>

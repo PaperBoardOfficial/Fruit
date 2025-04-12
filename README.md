@@ -1,4 +1,4 @@
-# PomoSpace
+# Fruit
 
 A productivity application built with Expo and React Native that combines Pomodoro timer, habit tracking, and spaced repetition learning tools.
 
@@ -36,7 +36,7 @@ To build an Android APK:
 ./build-android.sh
 ```
 
-The APK will be available at `./pomospace.apk` after the build completes.
+The APK will be available at `./fruit.apk` after the build completes.
 
 ## Technology Stack
 

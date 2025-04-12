@@ -1,4 +1,4 @@
-package com.paperboardoffical.pomospace
+package com.paperboardoffical.fruit
 
 import android.app.Application
 import android.content.res.Configuration

@@ -1,4 +1,4 @@
-package com.paperboardoffical.pomospace
+package com.paperboardoffical.fruit
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

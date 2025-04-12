@@ -86,9 +86,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.paperboardoffical.pomospace'
+    namespace 'com.paperboardoffical.fruit'
     defaultConfig {
-        applicationId 'com.paperboardoffical.pomospace'
+        applicationId 'com.paperboardoffical.fruit'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

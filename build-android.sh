@@ -8,7 +8,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-echo -e "${YELLOW}Building Android release APK for PomoSpace...${NC}"
+echo -e "${YELLOW}Building Android release APK for Fruit...${NC}"
 
 # Step 1: Clean previous builds
 echo -e "${GREEN}Cleaning previous builds...${NC}"
@@ -38,8 +38,8 @@ if [ -f "android/app/build/outputs/apk/release/app-release.apk" ]; then
   echo -e "${GREEN}APK location: android/app/build/outputs/apk/release/app-release.apk${NC}"
   
   # Copy APK to project root for easier access
-  cp android/app/build/outputs/apk/release/app-release.apk ./pomospace.apk
-  echo -e "${GREEN}APK copied to: ./pomospace.apk${NC}"
+  cp android/app/build/outputs/apk/release/app-release.apk ./fruit.apk
+  echo -e "${GREEN}APK copied to: ./fruit.apk${NC}"
 else
   echo -e "${YELLOW}Build may have failed. Check for errors above.${NC}"
 fi

@@ -1,23 +1,23 @@
 {
   "expo": {
-    "name": "pomospace",
-    "slug": "pomospace",
+    "name": "Fruit",
+    "slug": "fruit",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "pomospace",
+    "scheme": "fruit",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.paperboardoffical.pomospace"
+      "bundleIdentifier": "com.paperboardoffical.fruit"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.paperboardoffical.pomospace",
+      "package": "com.paperboardoffical.fruit",
       "permissions": [
         "android.permission.POST_NOTIFICATIONS",
         "android.permission.WAKE_LOCK",
