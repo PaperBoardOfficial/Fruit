@@ -1,12 +1,13 @@
 # Fruit
 
-A productivity application built with Expo and React Native that combines Pomodoro timer, habit tracking, and spaced repetition learning tools.
+A productivity application built with Expo and React Native that combines pomodoro timer, habit tracking, and spaced repetition learning tools.
 
 ## Features
 
 - ⏱️ **Pomodoro Timer**: Focus with customizable work and break sessions
 - ✅ **Habit Tracker**: Build consistency with daily habit tracking
 - 🔄 **Spaced Repetition**: Optimize learning with scheduled review reminders
+- 📊 **Statistics**: Visualize your productivity with detailed charts and graphs
 
 ## Getting Started
 
