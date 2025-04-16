@@ -1,12 +1,22 @@
+import "reflect-metadata";
 import { Stack } from "expo-router";
 import "@/global.css";
 import { useEffect } from "react";
-import { intializeNotificationService } from "@/src/services/notificationService";
+import notificationService from "@/src/services/notificationService";
+import { initializeDatabase } from "../database";
 
 export default function RootLayout() {
-
   useEffect(() => {
-    intializeNotificationService();
+    notificationService.initialize();
+    const setupDatabase = async () => {
+      try {
+        await initializeDatabase();
+      } catch (error) {
+        console.error("Failed to initialize database:", error);
+      }
+    };
+
+    setupDatabase();
   }, []);
 
   return (

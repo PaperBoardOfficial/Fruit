@@ -11,11 +11,6 @@ export default function PomodoroSettingsScreen() {
   const longBreakMinutes = usePomodoroStore(state => state.longBreakMinutes)
   const sessionsUntilLongBreak = usePomodoroStore(state => state.sessionsUntilLongBreak)
   const autoContinue = usePomodoroStore(state => state.autoContinue)
-  const setfocusMinutes = usePomodoroStore(state => state.setfocusMinutes)
-  const setBreakMinutes = usePomodoroStore(state => state.setBreakMinutes)
-  const setLongBreakMinutes = usePomodoroStore(state => state.setLongBreakMinutes)
-  const setSessionsUntilLongBreak = usePomodoroStore(state => state.setSessionsUntilLongBreak)
-  const setAutoContinue = usePomodoroStore(state => state.setAutoContinue)
 
   // Local state for input values
   const [focusInput, setFocusInput] = useState(focusMinutes.toString());
@@ -26,26 +21,17 @@ export default function PomodoroSettingsScreen() {
 
   // Save all settings
   const saveSettings = () => {
-    // Convert inputs to numbers and validate
     const focusMin = Math.max(1, Math.min(60, parseInt(focusInput) || 25));
     const breakMin = Math.max(1, Math.min(30, parseInt(breakInput) || 5));
     const longBreakMin = Math.max(1, Math.min(60, parseInt(longBreakInput) || 15));
     const sessions = Math.max(1, Math.min(10, parseInt(sessionsInput) || 4));
-
-    // Update store
-    setfocusMinutes(focusMin);
-    setBreakMinutes(breakMin);
-    setLongBreakMinutes(longBreakMin);
-    setSessionsUntilLongBreak(sessions);
-    setAutoContinue(isAutoContinue);
-
-    // Update local state with validated values
-    setFocusInput(focusMin.toString());
-    setBreakInput(breakMin.toString());
-    setLongBreakInput(longBreakMin.toString());
-    setSessionsInput(sessions.toString());
-
-    // Navigate back
+    usePomodoroStore.setState({
+      focusMinutes: focusMin,
+      breakMinutes: breakMin,
+      longBreakMinutes: longBreakMin,
+      sessionsUntilLongBreak: sessions,
+      autoContinue: isAutoContinue
+    })
     router.back();
   };
 

@@ -1,30 +1,38 @@
+import React, { useState } from 'react';
 import { Text, View, Pressable, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import usePomodoroStore from "@/src/store/usePomodoroStore";
 import SessionStatus from "@/src/components/SessionStatus";
 import TimerDisplay from "@/src/components/TimerDisplay";
+import pomodoroService from "@/src/services/pomodoroService";
+import LabelSelectionModal from '../../components/LabelSelectionModal';
+import { Label } from '../../entities/Label';
 
 export default function PomodoroScreen() {
-  const isActive = usePomodoroStore(state => state.isActive)
-  const status = usePomodoroStore(state => state.status)
-  const sessionCount = usePomodoroStore(state => state.sessionCount)
-  const sessionsUntilLongBreak = usePomodoroStore(state => state.sessionsUntilLongBreak)
-  const minutes = usePomodoroStore(state => state.minutes)
-  const seconds = usePomodoroStore(state => state.seconds)
-  const startTimer = usePomodoroStore(state => state.startTimer)
-  const pauseTimer = usePomodoroStore(state => state.pauseTimer)
-  const resetTimer = usePomodoroStore(state => state.resetTimer)
-  const skipToNextSession = usePomodoroStore(state => state.skipToNextSession)
+  const { minutes, seconds, isActive, status, selectedLabel, setSelectedLabel } = usePomodoroStore();
+  const [labelModalVisible, setLabelModalVisible] = useState(false);
 
-  const toggleTimer = async () => {
+  const handleStartPause = async () => {
     if (isActive) {
-      await pauseTimer();
+      await pomodoroService.pauseTimer();
     } else {
-      await startTimer();
+      await pomodoroService.startTimer();
     }
   };
 
+  const handleReset = async () => {
+    await pomodoroService.resetTimer();
+  };
+
+  const handleSkip = async () => {
+    await pomodoroService.skipToNextSession();
+  };
+
+  const handleSelectLabel = (label: Label | null) => {
+    setSelectedLabel(label);
+    setLabelModalVisible(false);
+  };
 
   return (
     <View className="flex-1 bg-white dark:bg-gray-900">
@@ -42,8 +50,8 @@ export default function PomodoroScreen() {
         <View className="items-center">
           <SessionStatus
             status={status}
-            sessionCount={sessionCount}
-            sessionsUntilLongBreak={sessionsUntilLongBreak}
+            sessionCount={usePomodoroStore(state => state.sessionCount)}
+            sessionsUntilLongBreak={usePomodoroStore(state => state.sessionsUntilLongBreak)}
           />
 
           <TimerDisplay minutes={minutes} seconds={seconds} />
@@ -51,7 +59,7 @@ export default function PomodoroScreen() {
           <View className="flex-row justify-center w-full mb-4 mt-8">
             <Pressable
               className={`px-10 py-3 rounded-3xl mr-8 ${isActive ? 'bg-orange-300' : 'bg-orange-400'}`}
-              onPress={toggleTimer}
+              onPress={handleStartPause}
             >
               <Text className="text-white font-medium">
                 {isActive ? 'Pause' : 'Start'}
@@ -60,7 +68,7 @@ export default function PomodoroScreen() {
 
             <Pressable
               className="bg-gray-500 px-10 py-3 rounded-3xl"
-              onPress={resetTimer}
+              onPress={handleReset}
             >
               <Text className="text-white font-medium">Reset</Text>
             </Pressable>
@@ -68,14 +76,31 @@ export default function PomodoroScreen() {
 
           <Pressable
             className="bg-gray-300 dark:bg-gray-600 px-4 py-2 rounded-full flex-row items-center justify-center"
-            onPress={skipToNextSession}
+            onPress={handleSkip}
           >
             <Ionicons name="play-skip-forward-outline" size={20} color="#6b7280" />
             <Text className="text-gray-600 dark:text-gray-300 ml-2">
               Skip
             </Text>
           </Pressable>
+
+          <Pressable
+            className="bg-gray-300 dark:bg-gray-600 px-4 py-2 rounded-full flex-row items-center justify-center"
+            onPress={() => setLabelModalVisible(true)}
+          >
+            <Ionicons name="pricetag-outline" size={20} color="#555" />
+            <Text className="text-gray-600 dark:text-gray-300 ml-2">
+              {selectedLabel ? selectedLabel.name : 'Add Label'}
+            </Text>
+          </Pressable>
         </View>
+
+        <LabelSelectionModal
+          visible={labelModalVisible}
+          onClose={() => setLabelModalVisible(false)}
+          onSelectLabel={handleSelectLabel}
+          selectedLabelId={selectedLabel?.id}
+        />
       </ScrollView>
     </View>
   );
